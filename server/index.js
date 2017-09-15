@@ -64,7 +64,7 @@ app.post('/sync',function(req,res){
     "content":req.body.content2,
     "sync":req.body.edit2
   }
-  console.log(file1);
+  console.log(file2);
   if((file1.name!=null)&&(file2.name!=null)){
     if(file1.name == file2.name){
       if(file1.timestamp > file2.timestamp){
@@ -133,25 +133,7 @@ app.post('/sync',function(req,res){
     //console.log("Change Synchronised: "+file2.name);
     });
   }
-	// fs.writeFile(__dirname+'/public/'+file2.name, file2.content, function(err) {
- //   	if(err) {
- //        return console.log(err);
- //    }
-	// 	console.log("Change Synchronised: "+file.name);
-	// });
- //  fs.writeFile(__dirname+'/public/'+file.name, file.content, function(err) {
- //    if(err) {
- //        return console.log(err);
- //    }
- //    console.log("Change Synchronised: "+file.name);
- //  });
- //  fs.writeFile(__dirname+'/public/'+file.signature+'-'+file.timestamp+'-'+file.name, file.content, function(err) {
- //  	if(err) {
- //        return console.log(err);
- //    }
-	// 	console.log("Change Synchronised: "+file.name);
- //    console.log("Branch Synchronised: "+file.signature+'-'+file.timestamp);
-	// });
+	
 });
 
 server.listen(port, function(){

@@ -38,7 +38,7 @@ fs.watch(parentDir, {recursive : true}, function(eventType, filename){
           "file2":filename,
           "signature2":signature,
           "timestamp2":Date.now(),
-          "content2": data
+          "content2":data
         };
         request(serverAddr+'/'+filename, function(error, response, body) {
           if(body != data) {
@@ -62,9 +62,10 @@ fs.watch(parentDir, {recursive : true}, function(eventType, filename){
 
 app.post('/sync',function(req,res){
 	var file = {
-		"name":req.body.file,
+		"name":req.body.name,
 		"content":req.body.content
 	};
+  console.log(file);
   fs.writeFile(parentDir+'/'+file.name, file.content, function(err) {
 		if(err) {
 	     return console.log(err);

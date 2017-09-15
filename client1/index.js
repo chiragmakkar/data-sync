@@ -38,13 +38,10 @@ fs.watch(parentDir, {recursive : true}, function(eventType, filename){
           "file1":filename,
           "signature1":signature,
           "timestamp1":Date.now(),
-          "content1 ": data
+          "content1":data
         };
         request(serverAddr+'/'+filename, function(error, response, body) {
-          if(body != data) {
-            var hiddenFilter = filename.split("");
-            console.log();
-            if(hiddenFilter[0] != ".") {
+          if(body != data) {            
               request.post(serverAddr+'/sync',{json: changes},
       		        function (error, response, body) {
       		          if (!error && response.statusCode == 200) {
@@ -52,8 +49,7 @@ fs.watch(parentDir, {recursive : true}, function(eventType, filename){
                       console.log('request sent');
       		          }
       		          console.log('Change Synchronised: '+filename);
-      				});
-            }
+      				});            
           }
         });
 			});
@@ -63,9 +59,10 @@ fs.watch(parentDir, {recursive : true}, function(eventType, filename){
 
 app.post('/sync',function(req,res){
 	var file = {
-		"name":req.body.file,
+		"name":req.body.name,
 		"content":req.body.content
 	};
+  console.log(file);
   fs.writeFile(parentDir+'/'+file.name, file.content, function(err) {
 		if(err) {
 	     return console.log(err);
